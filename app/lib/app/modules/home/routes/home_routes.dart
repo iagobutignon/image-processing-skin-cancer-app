@@ -3,20 +3,28 @@ import 'dart:typed_data';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class HomeRoutes {
-  static const home = '/';
+  static const signIn = '/';
+  static const signUp = '/sign_up/';
+  static const home = '/home';
   static const camera = '/camera/';
   static const editImage = '/edit_image/';
 
-  static Future<dynamic> pushCamera() async {
+  static Future<dynamic> pushSignUp() async {
+    return await Modular.to.pushNamed(
+      signUp,
+    );
+  }
+
+  static Future<Uint8List?> pushCamera() async {
     return await Modular.to.pushNamed(
       camera,
     );
   }
 
-  static Future<dynamic> pushEditImage(Uint8List picture) async {
+  static Future<Uint8List?> pushEditImage(Uint8List picture) async {
     return await Modular.to.pushNamed(
       editImage,
-      arguments: picture
+      arguments: picture,
     );
   }
 

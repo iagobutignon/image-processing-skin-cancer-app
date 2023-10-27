@@ -29,6 +29,7 @@ class _EditImagePageState extends State<EditImagePage> {
   void initState() {
     super.initState();
     store = Modular.get<EditImageStore>();
+    store.setPicture(widget.picture);
   }
 
   @override
@@ -40,23 +41,81 @@ class _EditImagePageState extends State<EditImagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: TripleBuilder<EditImageStore, EditImageState>(
-                builder: (context, triple) {
-                  if (triple.state.image == null) {
-                    return const CircularProgressIndicator();
-                  }
-                  return ExtendedImage.memory(triple.state.image!);
-                },
-              ),
-            ),
-          ),
-        ],
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: ScopedBuilder<EditImageStore, EditImageState>(
+          store: store,
+          onLoading: (context) {
+            return const CircularProgressIndicator();
+          },
+          onState: (context, state) {
+            return Column(
+              children: [
+                Expanded(
+                  child: ExtendedImage.memory(
+                    state.picture!,
+                    extendedImageEditorKey: store.editorKey,
+                    mode: ExtendedImageMode.editor,
+                    fit: BoxFit.contain,
+                    initEditorConfigHandler: (state) {
+                      return EditorConfig(
+                        maxScale: 8.0,
+                        hitTestSize: 20.0,
+                        cropRectPadding: const EdgeInsets.all(20),
+                        editorMaskColorHandler: (context, pointerDown) {
+                          return Colors.black54;
+                        },
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 50),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        onPressed: store.rotatePictureLeft,
+                        icon: const Icon(Icons.rotate_90_degrees_cw),
+                        color: Colors.white,
+                      ),
+                      IconButton(
+                        onPressed: store.rotatePictureRight,
+                        icon: const Icon(Icons.rotate_90_degrees_ccw),
+                        color: Colors.white,
+                      ),
+                      IconButton(
+                        onPressed: store.flipPicture,
+                        icon: const Icon(Icons.flip),
+                        color: Colors.white,
+                      ),
+                      IconButton(
+                        onPressed: store.resetPicture,
+                        icon: const Icon(Icons.refresh),
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
+                TextButton(
+                  onPressed: store.savePicture,
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all<Color>(
+                      Colors.white,
+                    ),
+                  ),
+                  child: const Text('Salvar'),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

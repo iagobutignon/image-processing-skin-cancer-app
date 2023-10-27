@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'interfaces/ihttp_service.dart';
 
 class HttpService implements IHttpService {
-  static const _url = "http://192.168.0.104:8000/";
+  static const _url = "http://192.168.0.109:8000/";
   // static const _url = "http://";
   
   final Dio _dio = Dio(BaseOptions(

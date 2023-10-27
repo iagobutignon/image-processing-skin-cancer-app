@@ -50,4 +50,4 @@ def histogram():
 
 if __name__ == "__main__":
     app.run(host="192.168.0.104", port=8000, debug=True)
-# flask run -h 192.168.0.109
+# flask run -h 192.168.0.109 -p 8000

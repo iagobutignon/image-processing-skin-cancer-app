@@ -21,10 +21,8 @@ class CameraStore extends Store<CameraState> {
     final XFile pictureFile = await cameraController.takePicture();
     final Uint8List pictureBytes = await pictureFile.readAsBytes();
     final Uint8List croppedImage = await cropPicture(pictureBytes);
-    final String pictureBase64 = base64Encode(croppedImage);
 
-
-    HomeRoutes.pop(pictureBase64);
+    HomeRoutes.pop(croppedImage);
   }
 
   Future<Uint8List> cropPicture(Uint8List picture) async {

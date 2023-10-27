@@ -40,7 +40,7 @@ class HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.camera_alt),
-            onPressed: store.registerPicture,
+            onPressed: store.pushCamera,
           )
         ],
       ),
