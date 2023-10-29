@@ -40,7 +40,8 @@ class _CameraPageState extends State<CameraPage> {
         backgroundColor: Colors.black,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: const Text('Camera App'),
+          title: Text(widget.title),
+          centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 4,
         ),

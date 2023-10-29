@@ -48,22 +48,19 @@ class _SignInPageState extends State<SignInPage> {
             children: [
               EmailField(
                 controller: TextEditingController(),
-                label: 'Email',
-                leadingIcon: const Icon(Icons.email),
                 marginBottom: 15,
               ),
               PasswordField(
-                label: 'Senha',
-                leadingIcon: const Icon(Icons.lock),
                 controller: TextEditingController(),
               ),
-              const TextLink(
+              TextLink(
                 text: 'Esqueceu sua senha? Clique Aqui!',
                 marginTop: 15,
+                onTap: store.pushForgotPassword,
               ),
               LargeButton(
                 label: 'Entrar',
-                onPressed: () {},
+                onPressed: store.navigateHome,
                 backgroundColor: const Color(AppColors.white),
                 foregroundColor: const Color(AppColors.green),
                 marginTop: 30,

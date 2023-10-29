@@ -14,9 +14,9 @@ class PasswordField extends StatefulWidget {
 
   const PasswordField({
     super.key,
-    required this.label,
-    required this.leadingIcon,
     required this.controller,
+    this.label = 'Senha',
+    this.leadingIcon = const Icon(Icons.lock),
     this.marginLeft = 0,
     this.marginTop = 0,
     this.marginRight = 0,

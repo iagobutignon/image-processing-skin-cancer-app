@@ -5,13 +5,15 @@ import '../routes/home_routes.dart';
 class SignInStore extends Store<int> {
   SignInStore() : super(0);
 
-  @override
-  void initStore() {
-    HomeRoutes.pushSignUp();
-    super.initStore();
+  void navigateHome() {
+    HomeRoutes.navigateHome();
   }
 
   Future<void> pushSignUp() async {
     await HomeRoutes.pushSignUp();
+  }
+
+  Future<void> pushForgotPassword() async {
+    await HomeRoutes.pushForgotPassword();
   }
 }

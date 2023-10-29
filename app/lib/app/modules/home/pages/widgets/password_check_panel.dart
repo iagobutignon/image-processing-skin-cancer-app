@@ -34,9 +34,9 @@ class PasswordCheckPanel extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       width: double.infinity,
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           CheckText(
             label: 'Mínimo de 8 caracteres',
             checked: true,

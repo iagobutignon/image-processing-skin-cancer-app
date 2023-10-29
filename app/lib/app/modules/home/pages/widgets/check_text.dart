@@ -6,10 +6,10 @@ class CheckText extends StatelessWidget {
   final bool checked;
   
   const CheckText({
-    Key? key,
+    super.key,
     required this.label,
     this.checked = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

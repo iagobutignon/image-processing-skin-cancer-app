@@ -46,12 +46,11 @@ class EditImageStore extends Store<EditImageState> {
 
       setLoading(true);
       final Uint8List result = await editImage(editorState);
-      HomeRoutes.pop(result);
+      HomeRoutes.pushProcessing(result);
       setLoading(false);
     } catch (e) {
       setLoading(false);
       setError(e);
-      print(error);
     }
   }
 

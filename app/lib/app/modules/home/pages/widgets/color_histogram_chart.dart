@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../../../../shared/colors/app_colors.dart';
+
 class ColorHistogramChart extends StatelessWidget {
   final List<int> colorHistogram;
 
@@ -13,18 +15,13 @@ class ColorHistogramChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 1.3,
+      aspectRatio: 2,
       child: SfCartesianChart(
-        primaryXAxis: CategoryAxis(
-          labelStyle: const TextStyle(),
-        ),
-        primaryYAxis: CategoryAxis(
-          name: "Histograma de Cores",
-          labelStyle: const TextStyle(),
-        ),
+        title: ChartTitle(text: 'Histograma de cores'),
         plotAreaBackgroundColor: Colors.white,
         series: <ChartSeries<int, int>>[
           ColumnSeries(
+            color: const Color(AppColors.black),
             dataSource: colorHistogram,
             xValueMapper: (v, x) => x,
             yValueMapper: (v, x) => v,

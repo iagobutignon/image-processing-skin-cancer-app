@@ -31,16 +31,4 @@ class HttpService implements IHttpService {
 
     return response.data;
   }
-
-  @override
-  Future put({required String endpoint}) async {
-    // TODO: implement put
-    throw UnimplementedError();
-  }
-
-  @override
-  Future delete({required String endpoint}) async {
-    // TODO: implement delete
-    throw UnimplementedError();
-  }
 }

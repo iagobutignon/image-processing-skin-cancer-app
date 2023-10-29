@@ -7,6 +7,7 @@ import 'package:flutter_triple/flutter_triple.dart';
 
 import '../../states/edit_image_state.dart';
 import '../../stores/edit_image_store.dart';
+import '../widgets/large_button.dart';
 
 class EditImagePage extends StatefulWidget {
   final String title;
@@ -14,7 +15,7 @@ class EditImagePage extends StatefulWidget {
 
   const EditImagePage({
     super.key,
-    this.title = 'Editar Camera',
+    this.title = 'Editar imagem',
     required this.picture,
   });
 
@@ -44,6 +45,7 @@ class _EditImagePageState extends State<EditImagePage> {
       appBar: AppBar(
         title: Text(widget.title),
         backgroundColor: Colors.transparent,
+        centerTitle: true,
         elevation: 0,
       ),
       extendBodyBehindAppBar: true,
@@ -103,14 +105,12 @@ class _EditImagePageState extends State<EditImagePage> {
                     ],
                   ),
                 ),
-                TextButton(
+                LargeButton(
                   onPressed: store.savePicture,
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                      Colors.white,
-                    ),
-                  ),
-                  child: const Text('Salvar'),
+                  label: 'Continuar',
+                  marginLeft: 8,
+                  marginRight: 8,
+                  marginBottom: 8,
                 ),
               ],
             );

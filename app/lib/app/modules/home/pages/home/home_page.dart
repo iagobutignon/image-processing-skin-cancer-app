@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_triple/flutter_triple.dart';
-import '../../states/home_state.dart';
+import '../../../../../shared/themes/app_theme.dart';
 import '../../stores/home_store.dart';
-import '../widgets/color_histogram_chart.dart';
+import '../widgets/large_button.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
 
   const HomePage({
-    Key? key,
-    this.title = 'Home',
-  }) : super(key: key);
+    super.key,
+    this.title = 'Início',
+  });
 
   @override
   HomePageState createState() => HomePageState();
@@ -36,55 +35,31 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: Text(widget.title),
+        backgroundColor: AppTheme.mainColor,
+        centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.camera_alt),
-            onPressed: store.pushCamera,
-          )
+            onPressed: () {},
+            icon: const Icon(Icons.person),
+          ),
         ],
       ),
+      drawer: const Drawer(),
       body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: TripleBuilder<HomeStore, HomeState>(
-          store: store,
-          builder: (context, triple) {
-            if (triple.isLoading) {
-              return const CircularProgressIndicator();
-            }
-            return Expanded(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: GridView(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 1 / 1,
-                        crossAxisSpacing: 5,
-                        mainAxisSpacing: 5,
-                      ),
-                      children: [
-                        if (triple.state.baseImg != null)
-                          Image.memory(triple.state.baseImg!),
-                        if (triple.state.grayScaleImg != null)
-                          Image.memory(triple.state.grayScaleImg!),
-                        if (triple.state.sobelmg != null)
-                          Image.memory(triple.state.sobelmg!),
-                        if (triple.state.contourImg != null)
-                          Image.memory(triple.state.contourImg!),
-                      ],
-                    ),
-                  ),
-                  if (triple.state.colorHistogram != null &&
-                      triple.state.colorHistogram!.isNotEmpty)
-                    ColorHistogramChart(
-                      colorHistogram: triple.state.colorHistogram!,
-                    ),
-                ],
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          children: [
+            const Expanded(
+              child: Center(
+                child: Text('Descrição sobre o melanoma'),
               ),
-            );
-          },
+            ),
+            LargeButton(
+              label: 'Iniciar Análise',
+              onPressed: store.startAnalysis,
+            ),
+          ],
         ),
       ),
     );

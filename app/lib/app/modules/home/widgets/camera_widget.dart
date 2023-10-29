@@ -11,10 +11,10 @@ class CameraWidget extends StatefulWidget {
   final void Function()? onTakePicture;
 
   const CameraWidget({
-    Key? key,
+    super.key,
     required this.store,
     this.onTakePicture,
-  }) : super(key: key);
+  });
 
   @override
   State<CameraWidget> createState() => _CameraWidgetState();
@@ -94,7 +94,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                     },
                     child: CameraPreview(
                       widget.store.cameraController,
-                      child: Stack(
+                      child: const Stack(
                         alignment: Alignment.center,
                       ),
                     ).build(context),
