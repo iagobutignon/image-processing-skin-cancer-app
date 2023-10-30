@@ -6,11 +6,18 @@ class HomeRoutes {
   static const signIn = '/';
   static const signUp = '/sign_up/';
   static const forgotPassword = '/forgot_password/';
+  static const changePassword = '/change_password/';
   static const home = '/home';
   static const camera = '/camera/';
   static const editImage = '/edit_image/';
   static const processing = '/processing/';
   static const analysis = '/analysis/';
+
+  static void navigateSignIn() {
+    Modular.to.navigate(
+      signIn,
+    );
+  }
 
   static void navigateHome() {
     Modular.to.navigate(
@@ -27,6 +34,12 @@ class HomeRoutes {
   static Future<dynamic> pushForgotPassword() async {
     return await Modular.to.pushNamed(
       forgotPassword,
+    );
+  }
+
+  static Future<dynamic> pushChangePassword() async {
+    return await Modular.to.pushNamed(
+      changePassword,
     );
   }
 
