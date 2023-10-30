@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../../../../../shared/colors/app_colors.dart';
+import '../../../../../../shared/colors/app_colors.dart';
 
 class ArcChart extends StatelessWidget {
   final String label;

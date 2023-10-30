@@ -4,7 +4,7 @@ import 'package:flutter_triple/flutter_triple.dart';
 
 import '../../states/camera_state.dart';
 import '../../stores/camera_store.dart';
-import '../../widgets/camera_widget.dart';
+import 'widgets/camera_widget.dart';
 
 class CameraPage extends StatefulWidget {
   final String title;

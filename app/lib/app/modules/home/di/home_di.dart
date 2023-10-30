@@ -13,21 +13,27 @@ import '../services/http_service.dart';
 import '../services/image_processing_service.dart';
 import '../services/interfaces/ihttp_service.dart';
 import '../services/interfaces/iimage_processing_service.dart';
+import '../stores/analysis_store.dart';
 import '../stores/camera_store.dart';
 import '../stores/edit_image_store.dart';
+import '../stores/forgot_password_store.dart';
 import '../stores/home_store.dart';
 import '../stores/processing_store.dart';
 import '../stores/sign_in_store.dart';
+import '../stores/sign_up_store.dart';
 
 class HomeDI {
   static List<Bind> get binds => [
     Bind.lazySingleton<IHttpService>((i) => HttpService()),
     Bind.lazySingleton<IImageProcessingService>((i) => ImageProcessingService(i())),
     Bind.lazySingleton((i) => SignInStore()),
+    Bind.lazySingleton((i) => SignUpStore()),
+    Bind.lazySingleton((i) => ForgotPasswordStore()),
     Bind.lazySingleton((i) => HomeStore()),
     Bind.lazySingleton((i) => CameraStore()),
     Bind.lazySingleton((i) => EditImageStore()),
     Bind.lazySingleton((i) => ProcessingStore()),
+    Bind.lazySingleton((i) => AnalysisStore())
   ];
 
   static List<ModularRoute> get routes => [

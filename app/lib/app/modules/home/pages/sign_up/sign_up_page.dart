@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tcc_iago/app/modules/home/pages/widgets/large_button.dart';
-import 'package:tcc_iago/shared/themes/app_theme.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
+import '../../../../../shared/themes/app_theme.dart';
+import '../../stores/sign_up_store.dart';
 import '../widgets/email_field.dart';
-import '../widgets/password_check_panel.dart';
+import '../widgets/large_button.dart';
+import 'widgets/password_check_panel.dart';
 import '../widgets/password_field.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -19,6 +21,20 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  late final SignUpStore store;
+
+  @override
+  void initState() {
+    super.initState();
+    store = Modular.get<SignUpStore>();
+  }
+
+  @override
+  void dispose() {
+    Modular.dispose<SignUpStore>();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

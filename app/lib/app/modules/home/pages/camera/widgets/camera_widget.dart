@@ -2,8 +2,8 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 
-import '../states/camera_state.dart';
-import '../stores/camera_store.dart';
+import '../../../states/camera_state.dart';
+import '../../../stores/camera_store.dart';
 import 'camera_icon.dart';
 
 class CameraWidget extends StatefulWidget {

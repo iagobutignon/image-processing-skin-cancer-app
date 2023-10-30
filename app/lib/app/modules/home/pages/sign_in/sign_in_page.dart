@@ -14,7 +14,7 @@ class SignInPage extends StatefulWidget {
 
   const SignInPage({
     super.key,
-    this.title = 'SignInPage',
+    this.title = 'Login',
   });
 
   @override

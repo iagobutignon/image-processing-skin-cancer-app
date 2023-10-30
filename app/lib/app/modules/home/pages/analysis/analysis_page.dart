@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../../shared/themes/app_theme.dart';
-import '../widgets/arc_chart.dart';
+import '../../stores/analysis_store.dart';
+import 'widgets/arc_chart.dart';
 import '../widgets/large_button.dart';
 
 class AnalysisPage extends StatefulWidget {
@@ -9,7 +11,7 @@ class AnalysisPage extends StatefulWidget {
 
   const AnalysisPage({
     super.key,
-    this.title = 'Resultado da Análise',
+    this.title = 'Resultado da análise',
   });
 
   @override
@@ -17,6 +19,20 @@ class AnalysisPage extends StatefulWidget {
 }
 
 class _AnalysisPageState extends State<AnalysisPage> {
+  late final AnalysisStore store;
+
+  @override
+  void initState() {
+    super.initState();
+    store = Modular.get<AnalysisStore>();
+  }
+
+  @override
+  void dispose() {
+    Modular.dispose<AnalysisStore>();
+    super.dispose();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

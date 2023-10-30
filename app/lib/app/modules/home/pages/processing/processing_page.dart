@@ -7,7 +7,7 @@ import 'package:flutter_triple/flutter_triple.dart';
 import '../../../../../shared/themes/app_theme.dart';
 import '../../states/processing_state.dart';
 import '../../stores/processing_store.dart';
-import '../widgets/color_histogram_chart.dart';
+import 'widgets/color_histogram_chart.dart';
 import '../widgets/large_button.dart';
 import 'widgets/processing_image.dart';
 
@@ -48,6 +48,12 @@ class _ProcessingPageState extends State<ProcessingPage> {
         title: Text(widget.title),
         backgroundColor: AppTheme.mainColor,
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: store.refresh,
+            icon: const Icon(Icons.refresh),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
@@ -55,7 +61,9 @@ class _ProcessingPageState extends State<ProcessingPage> {
           store: store,
           builder: (context, triple) {
             if (triple.isLoading) {
-              return const CircularProgressIndicator();
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }
             return Column(
               mainAxisSize: MainAxisSize.max,

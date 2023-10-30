@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../../../shared/colors/app_colors.dart';
+import '../../../../../../shared/colors/app_colors.dart';
 
 class ColorHistogramChart extends StatelessWidget {
   final List<int> colorHistogram;

@@ -39,9 +39,18 @@ class HomePageState extends State<HomePage> {
         backgroundColor: AppTheme.mainColor,
         centerTitle: true,
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.person),
+          PopupMenuButton(
+            itemBuilder: (context) {
+              return const [
+                PopupMenuItem(
+                  child: Text('Sair'),
+                ),
+              ];
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(8),
+              child: Icon(Icons.person),
+            ),
           ),
         ],
       ),

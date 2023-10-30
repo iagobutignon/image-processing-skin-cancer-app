@@ -54,7 +54,9 @@ class _EditImagePageState extends State<EditImagePage> {
         child: ScopedBuilder<EditImageStore, EditImageState>(
           store: store,
           onLoading: (context) {
-            return const CircularProgressIndicator();
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           },
           onState: (context, state) {
             return Column(

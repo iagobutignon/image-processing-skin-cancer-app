@@ -24,6 +24,12 @@ class ProcessingStore extends Store<ProcessingState> {
     await HomeRoutes.pushAnalysis();
   }
 
+  Future<void> refresh() async {
+    setLoading(true, force: true);
+    await Future.delayed(const Duration(seconds: 3));
+    setLoading(false, force: true);
+  }
+
   Future<List<int>> genenateMockHistogram() async {
     List<int> list = [];
 
