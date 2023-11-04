@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "767585529386",
+    "project_id": "image-processing-skin-cancer",
+    "storage_bucket": "image-processing-skin-cancer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767585529386:android:0f53595b81fe2bc8be1d53",
+        "android_client_info": {
+          "package_name": "com.tcc.iago.tcc_iago"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8mab_ud911wHtXVtW3rWqcSC3HXKiQXk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
