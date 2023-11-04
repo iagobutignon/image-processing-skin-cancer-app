@@ -12,8 +12,10 @@ import '../pages/sign_up/sign_up_page.dart';
 import '../routes/home_routes.dart';
 import '../services/http_service.dart';
 import '../services/image_processing_service.dart';
+import '../services/image_service.dart';
 import '../services/interfaces/ihttp_service.dart';
 import '../services/interfaces/iimage_processing_service.dart';
+import '../services/interfaces/iimage_service.dart';
 import '../stores/analysis_store.dart';
 import '../stores/camera_store.dart';
 import '../stores/change_password_store.dart';
@@ -28,13 +30,14 @@ class HomeDI {
   static List<Bind> get binds => [
     Bind.lazySingleton<IHttpService>((i) => HttpService()),
     Bind.lazySingleton<IImageProcessingService>((i) => ImageProcessingService(i())),
+    Bind.lazySingleton<IImageService>((i) => ImageService()),
     Bind.lazySingleton((i) => SignInStore()),
     Bind.lazySingleton((i) => SignUpStore()),
     Bind.lazySingleton((i) => ForgotPasswordStore()),
     Bind.lazySingleton((i) => ChangePasswordStore()),
     Bind.lazySingleton((i) => HomeStore()),
     Bind.lazySingleton((i) => CameraStore()),
-    Bind.lazySingleton((i) => EditImageStore()),
+    Bind.lazySingleton((i) => EditImageStore(i())),
     Bind.lazySingleton((i) => ProcessingStore()),
     Bind.lazySingleton((i) => AnalysisStore())
   ];

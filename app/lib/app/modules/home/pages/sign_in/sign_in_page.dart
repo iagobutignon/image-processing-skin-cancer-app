@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_iago/shared/colors/app_colors.dart';
 
+import '../../../../../shared/assets/app_icons.dart';
 import '../../../../../shared/themes/app_theme.dart';
 import '../../stores/sign_in_store.dart';
 import '../widgets/email_field.dart';
@@ -72,7 +73,10 @@ class _SignInPageState extends State<SignInPage> {
               ),
               LargeButton(
                 label: 'Entrar com a conta Google',
-                preffixIcon: const Icon(Icons.mail),
+                preffixIcon: Image.asset(
+                  AppIcons.google48px,
+                  scale: 1.8,
+                ),
                 onPressed: () {},
                 backgroundColor: const Color(AppColors.white),
                 foregroundColor: const Color(AppColors.green),

@@ -71,6 +71,7 @@ class _EditImagePageState extends State<EditImagePage> {
                       return EditorConfig(
                         maxScale: 8.0,
                         hitTestSize: 20.0,
+                        cropAspectRatio: CropAspectRatios.ratio1_1,
                         cropRectPadding: const EdgeInsets.all(20),
                         editorMaskColorHandler: (context, pointerDown) {
                           return Colors.black54;
