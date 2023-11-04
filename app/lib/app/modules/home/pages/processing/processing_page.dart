@@ -83,17 +83,17 @@ class _ProcessingPageState extends State<ProcessingPage> {
                           label: 'Original',
                           image: triple.state.baseImg!,
                         ),
-                      if (triple.state.baseImg != null)
+                      if (triple.state.grayScaleImg != null)
                         ProcessingImage(
                           label: 'Escala de Cinza',
                           image: triple.state.grayScaleImg!,
                         ),
-                      if (triple.state.baseImg != null)
+                      if (triple.state.sobelmg != null)
                         ProcessingImage(
                           label: 'Sobel',
                           image: triple.state.sobelmg!,
                         ),
-                      if (triple.state.baseImg != null)
+                      if (triple.state.contourImg != null)
                         ProcessingImage(
                           label: 'Contour',
                           image: triple.state.contourImg!,

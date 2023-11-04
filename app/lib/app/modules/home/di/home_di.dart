@@ -38,7 +38,7 @@ class HomeDI {
     Bind.lazySingleton((i) => HomeStore()),
     Bind.lazySingleton((i) => CameraStore()),
     Bind.lazySingleton((i) => EditImageStore(i())),
-    Bind.lazySingleton((i) => ProcessingStore()),
+    Bind.lazySingleton((i) => ProcessingStore(i())),
     Bind.lazySingleton((i) => AnalysisStore())
   ];
 
