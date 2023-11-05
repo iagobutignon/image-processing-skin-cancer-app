@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../../../shared/themes/app_theme.dart';
+import '../../../../../core/themes/app_theme.dart';
+import '../../../shared/widgets/large_button.dart';
 import '../../stores/home_store.dart';
-import '../widgets/large_button.dart';
 
 class HomePage extends StatefulWidget {
   final String title;

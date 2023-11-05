@@ -12,7 +12,20 @@
           "package_name": "com.tcc.iago.tcc_iago"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "767585529386-effcir9e68ggd2ljhr19p8damllhm1l1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tcc.iago.tcc_iago",
+            "certificate_hash": "6bfcb386d0202dcaa89b71be9f35879c2d58aa05"
+          }
+        },
+        {
+          "client_id": "767585529386-j09o15dcu12d5p9mnvkin4l35hsuhu1l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD8mab_ud911wHtXVtW3rWqcSC3HXKiQXk"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767585529386-j09o15dcu12d5p9mnvkin4l35hsuhu1l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "767585529386-pfoh2vdhbilr40vtouu3otacqsd8fst1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tcc.iago.tccIago"
+              }
+            }
+          ]
         }
       }
     }

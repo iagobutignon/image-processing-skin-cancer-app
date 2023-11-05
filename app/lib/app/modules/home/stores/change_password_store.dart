@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 
-import '../extensions/password_extension.dart';
-import '../pages/widgets/error_snackbar.dart';
-import '../pages/widgets/info_snackbar.dart';
-import '../services/interfaces/iauth_service.dart';
+import '../../shared/extensions/password_extension.dart';
+import '../../shared/widgets/error_snackbar.dart';
+import '../../shared/widgets/info_snackbar.dart';
+import '../../shared/services/interfaces/iauth_service.dart';
 import '../states/change_password_state.dart';
 
 class ChangePasswordStore extends Store<ChangePasswordState> {

@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../../../../../../shared/colors/app_colors.dart';
+import '../../../../../../core/colors/app_colors.dart';
 
-class ArcChart extends StatelessWidget {
+class ArcChart extends StatefulWidget {
   final String label;
   final double value;
 
@@ -15,69 +15,101 @@ class ArcChart extends StatelessWidget {
   });
 
   @override
+  State<ArcChart> createState() => _ArcChartState();
+}
+
+class _ArcChartState extends State<ArcChart> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    animateArc();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Future<void> animateArc() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    _controller.animateTo(widget.value, duration: const Duration(seconds: 2));
+  }
+
+  @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
-    return Column(
-      children: [
-        CustomPaint(
-          size: Size(size.width * 0.75, size.height * 0.30),
-          painter: _ArcPainter(
-            value: value,
-            label: label,
+    return Builder(builder: (context) {
+      return Column(
+        children: [
+          CustomPaint(
+            willChange: true,
+            size: Size(size.width * 0.75, size.height * 0.30),
+            painter: _ArcPainter(
+              value: widget.value,
+              label: widget.label,
+              listenable: _controller,
+            ),
           ),
-        ),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 25),
-              child: Text(
-                '0',
-                style: TextStyle(
-                  fontSize: 16,
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 25),
+                child: Text(
+                  '0',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 25),
+                child: Text(
+                  '100',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                widget.label,
+                style: const TextStyle(
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 25),
-              child: Text(
-                '100',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              label,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
+            ],
+          ),
+        ],
+      );
+    });
   }
 }
 
 class _ArcPainter extends CustomPainter {
   final double value;
   final String label;
+  final Animation listenable;
 
-  _ArcPainter({
+  _ArcPainter(
+    {
     required this.value,
     required this.label,
-  });
+    required this.listenable,
+  }) : super(repaint: listenable);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -90,7 +122,7 @@ class _ArcPainter extends CustomPainter {
 
     final Paint valuePaint = Paint();
     late final Color valueColor;
-
+    final value = listenable.value;
     switch (value) {
       case < 0.25:
         valueColor = const Color(AppColors.green);
@@ -151,54 +183,6 @@ class _ArcPainter extends CustomPainter {
         (size.height - valueText.height),
       ),
     );
-
-    // final maxValueText = TextPainter(
-    //   text: const TextSpan(
-    //     text: '100',
-    //     style: TextStyle(
-    //       color: Color(AppColors.black),
-    //       fontSize: 20.0,
-    //     ),
-    //   ),
-    //   textDirection: TextDirection.rtl,
-    // );
-
-    // maxValueText.layout(
-    //   minWidth: size.width,
-    //   maxWidth: size.width,
-    // );
-
-    // maxValueText.paint(
-    //   canvas,
-    //   Offset(
-    //     (size.width - maxValueText.width),
-    //     (size.height - valueText.height + 40),
-    //   ),
-    // );
-
-    // final minValueText = TextPainter(
-    //   text: const TextSpan(
-    //     text: '     0',
-    //     style: TextStyle(
-    //       color: Color(AppColors.black),
-    //       fontSize: 20.0,
-    //     ),
-    //   ),
-    //   textDirection: TextDirection.ltr,
-    // );
-
-    // minValueText.layout(
-    //   minWidth: size.width,
-    //   maxWidth: size.width,
-    // );
-
-    // minValueText.paint(
-    //   canvas,
-    //   Offset(
-    //     (size.width - minValueText.width),
-    //     (size.height - valueText.height + 40),
-    //   ),
-    // );
   }
 
   @override

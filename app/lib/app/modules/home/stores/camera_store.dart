@@ -20,7 +20,7 @@ class CameraStore extends Store<CameraState> {
     final Uint8List pictureBytes = await pictureFile.readAsBytes();
     final Uint8List croppedImage = await cropPicture(pictureBytes);
 
-    HomeRoutes.pushEditImage(croppedImage);
+    HomeRoutes().pushEditImage(croppedImage);
   }
 
   Future<Uint8List> cropPicture(Uint8List picture) async {

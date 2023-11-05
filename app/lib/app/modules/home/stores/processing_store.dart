@@ -14,28 +14,45 @@ class ProcessingStore extends Store<ProcessingState> {
   
   ProcessingStore(this._imageProcessingService) : super(ProcessingState());
 
+  Future<String> base(String id, String image) async {
+    return image;
+  }
+
+  Future<String> toContour(String id, String image) async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    final contourImg = await _imageProcessingService.toContour(image, id);
+    return contourImg['image'];
+  }
+
+  Future<String> toGrayscale(String id, String image) async {
+    await Future.delayed(const Duration(seconds: 3));
+
+    final contourImg = await _imageProcessingService.toGrayscale(image, id);
+    return contourImg['image'];
+  }
+
+  Future<String> toSobel(String id, String image) async {
+    await Future.delayed(const Duration(seconds: 1));
+
+    final contourImg = await _imageProcessingService.toSobel(image, id);
+    return contourImg['image'];
+  }
+
+  Future<List<int>> getColorHistogram(String id, String image) async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    final colorHistogram = await _imageProcessingService.getColorHistogram(image, id);
+    return List<int>.from(colorHistogram['image']);
+  }
+
   Future<void> setImage(Uint8List picture) async {
     try {
       setLoading(true, force: true);
 
-      final image = base64Encode(picture);
-
-      final id = Guid.newGuid;
-
       final aux = state;
-      aux.baseImg = picture;
-
-      final contourImg = await _imageProcessingService.toContour(image, id);
-      aux.contourImg = base64Decode(contourImg['image']);
-
-      final grayScaleImg = await _imageProcessingService.toGrayscale(image, id);
-      aux.grayScaleImg = base64Decode(grayScaleImg['image']);
-
-      final sobelmg = await _imageProcessingService.toSobel(image, id);
-      aux.sobelmg = base64Decode(sobelmg['image']);
-
-      final colorHistogram = await _imageProcessingService.getColorHistogram(image, id);
-      aux.colorHistogram = List<int>.from(colorHistogram['image']);
+      aux.baseImg = base64Encode(picture);
+      aux.id = Guid.newGuid;
 
       setLoading(false, force: true);
       await execute(() async => aux);
@@ -46,7 +63,7 @@ class ProcessingStore extends Store<ProcessingState> {
   }
 
   Future<void> pushAnalysis() async {
-    await HomeRoutes.pushAnalysis();
+    await HomeRoutes().pushAnalysis();
   }
 
   Future<void> refresh() async {

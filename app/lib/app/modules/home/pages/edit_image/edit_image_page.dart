@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 
+import '../../../shared/widgets/large_button.dart';
 import '../../states/edit_image_state.dart';
 import '../../stores/edit_image_store.dart';
-import '../widgets/large_button.dart';
 
 class EditImagePage extends StatefulWidget {
   final String title;

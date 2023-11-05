@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../../../shared/themes/app_theme.dart';
+import '../../../../../core/themes/app_theme.dart';
+import '../../../shared/widgets/large_button.dart';
 import '../../stores/analysis_store.dart';
 import 'widgets/arc_chart.dart';
-import '../widgets/large_button.dart';
 
 class AnalysisPage extends StatefulWidget {
   final String title;
@@ -48,7 +48,7 @@ class _AnalysisPageState extends State<AnalysisPage> {
             Spacer(),
             ArcChart(
               label: 'Probabilidade de melanoma',
-              value: 0.67,
+              value: 0.90,
             ),
             Spacer(),
             LargeButton(

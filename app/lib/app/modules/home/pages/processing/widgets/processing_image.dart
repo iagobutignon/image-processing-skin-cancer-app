@@ -1,18 +1,45 @@
-import 'dart:typed_data';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_triple/flutter_triple.dart';
 
-import '../../../../../../shared/colors/app_colors.dart';
+import '../../../../../../core/colors/app_colors.dart';
+import '../../../stores/processing_image_store.dart';
 
-class ProcessingImage extends StatelessWidget {
+class ProcessingImage extends StatefulWidget {
   final String label;
-  final Uint8List image;
+  final String? id;
+  final String? image;
+  final Future<String> Function(String, String) callback;
 
   const ProcessingImage({
     super.key,
     required this.label,
+    required this.id,
     required this.image,
+    required this.callback,
   });
+
+  @override
+  State<ProcessingImage> createState() => _ProcessingImageState();
+}
+
+class _ProcessingImageState extends State<ProcessingImage> {
+  late final ProcessingImageStore store;
+
+  @override
+  void initState() {
+    super.initState();
+    store = Modular.get<ProcessingImageStore>();
+    store.processImage(id: widget.id, image: widget.image, f: widget.callback);
+  }
+
+  @override
+  void dispose() {
+    Modular.dispose<ProcessingImageStore>();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +51,17 @@ class ProcessingImage extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Image.memory(
-            image,
-            fit: BoxFit.cover,
+          TripleBuilder<ProcessingImageStore, String>(
+            store: store,
+            builder: (context, triple) {
+              if (triple.isLoading || triple.state.isEmpty) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              return Image.memory(
+                base64Decode(triple.state),
+                fit: BoxFit.cover,
+              );
+            }
           ),
           Positioned(
             top: 0,
@@ -37,7 +72,7 @@ class ProcessingImage extends StatelessWidget {
                 borderRadius: const BorderRadius.only(bottomRight: Radius.circular(18)),
               ),
               child: Text(
-                label,
+                widget.label,
                 style: TextStyle(
                   color: const Color(AppColors.black).withAlpha(200),
                   fontWeight: FontWeight.bold,

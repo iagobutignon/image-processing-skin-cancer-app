@@ -2,71 +2,49 @@ import 'dart:typed_data';
 
 import 'package:flutter_modular/flutter_modular.dart';
 
-class HomeRoutes {
-  static const signIn = '/';
-  static const signUp = '/sign_up/';
-  static const forgotPassword = '/forgot_password/';
-  static const changePassword = '/change_password/';
-  static const home = '/home';
-  static const camera = '/camera/';
-  static const editImage = '/edit_image/';
-  static const processing = '/processing/';
-  static const analysis = '/analysis/';
+import '../../../app_routes.dart';
 
-  static void navigateSignIn() {
-    Modular.to.navigate(
-      signIn,
-    );
-  }
+class HomeRoutes extends AppRoutes {
+  final home = '/';
+  final changePassword = '/change_password/';
+  final camera = '/camera/';
+  final editImage = '/edit_image/';
+  final processing = '/processing/';
+  final analysis = '/analysis/';
 
-  static void navigateHome() {
-    Modular.to.navigate(
-      home,
-    );
-  }
-
-  static Future<dynamic> pushSignUp() async {
+  Future<dynamic> pushChangePassword() async {
     return await Modular.to.pushNamed(
-      signUp,
+      '$homeModule$changePassword'.removeDoubleSlash(),
     );
   }
 
-  static Future<dynamic> pushForgotPassword() async {
+  Future<Uint8List?> pushCamera() async {
     return await Modular.to.pushNamed(
-      forgotPassword,
+      '$homeModule$camera'.removeDoubleSlash(),
     );
   }
 
-  static Future<dynamic> pushChangePassword() async {
+  Future<Uint8List?> pushEditImage(Uint8List picture) async {
     return await Modular.to.pushNamed(
-      changePassword,
-    );
-  }
-
-  static Future<Uint8List?> pushCamera() async {
-    return await Modular.to.pushNamed(
-      camera,
-    );
-  }
-
-  static Future<Uint8List?> pushEditImage(Uint8List picture) async {
-    return await Modular.to.pushNamed(
-      editImage,
+      '$homeModule$editImage'.removeDoubleSlash(),
       arguments: picture,
     );
   }
 
-  static Future<void> pushProcessing(Uint8List picture) async {
-    await Modular.to.pushNamed(processing, arguments: picture);
-  }
-
-  static Future<void> pushAnalysis() async {
+  Future<void> pushProcessing(Uint8List picture) async {
     await Modular.to.pushNamed(
-      analysis,
+      '$homeModule$processing'.removeDoubleSlash(),
+      arguments: picture,
     );
   }
 
-  static Future<dynamic> pop([dynamic args]) async {
+  Future<void> pushAnalysis() async {
+    await Modular.to.pushNamed(
+      '$homeModule$analysis'.removeDoubleSlash(),
+    );
+  }
+
+  Future<dynamic> pop([dynamic args]) async {
     Modular.to.pop(args);
   }
 }

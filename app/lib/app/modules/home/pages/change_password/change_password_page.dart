@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../../../shared/themes/app_theme.dart';
+import '../../../../../core/themes/app_theme.dart';
+import '../../../shared/widgets/large_button.dart';
+import '../../../shared/widgets/password_check_panel.dart';
+import '../../../shared/widgets/password_field.dart';
 import '../../stores/change_password_store.dart';
-import '../sign_up/widgets/password_check_panel.dart';
-import '../widgets/large_button.dart';
-import '../widgets/password_field.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   final String title;

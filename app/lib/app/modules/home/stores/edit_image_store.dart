@@ -43,7 +43,7 @@ class EditImageStore extends Store<EditImageState> {
         throw Exception('Erro ao editar imagem');
       }
 
-      HomeRoutes.pushProcessing(result);
+      HomeRoutes().pushProcessing(result);
       setLoading(false);
     } catch (e) {
       setLoading(false);
