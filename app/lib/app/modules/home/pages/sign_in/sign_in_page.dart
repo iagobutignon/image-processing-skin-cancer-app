@@ -48,11 +48,13 @@ class _SignInPageState extends State<SignInPage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               EmailField(
-                controller: TextEditingController(),
+                controller: store.emailController,
+                withBorder: false,
                 marginBottom: 15,
               ),
               PasswordField(
-                controller: TextEditingController(),
+                controller: store.passwordController,
+                withBorder: false,
               ),
               TextLink(
                 text: 'Esqueceu sua senha? Clique Aqui!',
@@ -61,7 +63,7 @@ class _SignInPageState extends State<SignInPage> {
               ),
               LargeButton(
                 label: 'Entrar',
-                onPressed: store.navigateHome,
+                onPressed: store.signIn,
                 backgroundColor: const Color(AppColors.white),
                 foregroundColor: const Color(AppColors.green),
                 marginTop: 30,
@@ -77,7 +79,7 @@ class _SignInPageState extends State<SignInPage> {
                   AppIcons.google48px,
                   scale: 1.8,
                 ),
-                onPressed: () {},
+                onPressed: store.signInWithGoogle,
                 backgroundColor: const Color(AppColors.white),
                 foregroundColor: const Color(AppColors.green),
                 marginTop: 60,

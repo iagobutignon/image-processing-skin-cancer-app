@@ -1,12 +1,17 @@
 import 'package:flutter_triple/flutter_triple.dart';
 
 import '../routes/home_routes.dart';
+import '../services/interfaces/iauth_service.dart';
 import '../states/home_state.dart';
 
 class HomeStore extends Store<HomeState> {
-  HomeStore() : super(HomeState());
+  final IAuthService _authService;
 
-  void logoff() {
+  HomeStore(this._authService) : super(HomeState());
+
+  Future<void> signOut() async {
+    await _authService.signOut();
+
     HomeRoutes.navigateSignIn();
   }
 

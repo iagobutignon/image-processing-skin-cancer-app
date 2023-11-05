@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_triple/flutter_triple.dart';
 
 import '../../../../../shared/themes/app_theme.dart';
+import '../../states/sign_up_state.dart';
 import '../../stores/sign_up_store.dart';
 import '../widgets/email_field.dart';
 import '../widgets/large_button.dart';
@@ -43,34 +45,51 @@ class _SignUpPageState extends State<SignUpPage> {
         backgroundColor: AppTheme.mainColor,
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          children: [
-            EmailField(
-              controller: TextEditingController(),
-              marginTop: 5,
+      body: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                children: [
+                  EmailField(
+                    controller: store.emailController,
+                    marginTop: 5,
+                  ),
+                  TripleBuilder<SignUpStore, SignUpState>(
+                      store: store,
+                      builder: (context, triple) {
+                        return PasswordCheckPanel(
+                          marginTop: 15,
+                          hasMinChars: triple.state.hasMinChars,
+                          hasOneNumber: triple.state.hasOneNumber,
+                          hasOneLowerLetter: triple.state.hasOneLowerLetter,
+                          hasOneUpperLetter: triple.state.hasOneUpperLetter,
+                          hasOneSymbol: triple.state.hasOneSymbol,
+                          isValid: triple.state.isValidPassword,
+                        );
+                      }),
+                  PasswordField(
+                    controller: store.passwordController,
+                    marginTop: 15,
+                  ),
+                  PasswordField(
+                    label: 'Confirmar Senha',
+                    controller: store.confirmPasswordController,
+                    marginTop: 15,
+                  ),
+                  const Spacer(),
+                  LargeButton(
+                    label: 'Criar Conta',
+                    onPressed: store.createAccout,
+                    marginTop: 40,
+                  ),
+                ],
+              ),
             ),
-            const PasswordCheckPanel(
-              marginTop: 15,
-            ),
-            PasswordField(
-              controller: TextEditingController(),
-              marginTop: 15,
-            ),
-            PasswordField(
-              label: 'Confirmar Senha',
-              controller: TextEditingController(),
-              marginTop: 15,
-            ),
-            const Spacer(),
-            LargeButton(
-              label: 'Criar Conta',
-              onPressed: () {},
-              marginTop: 40,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

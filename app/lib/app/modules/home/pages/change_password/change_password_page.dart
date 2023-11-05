@@ -67,7 +67,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             const Spacer(),
             LargeButton(
               label: 'Alterar senha',
-              onPressed: () {},
+              onPressed: store.changePassword,
               marginTop: 40,
             ),
           ],

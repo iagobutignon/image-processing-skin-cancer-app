@@ -46,13 +46,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         child: Column(
           children: [
             EmailField(
-              controller: TextEditingController(),
+              controller: store.emailController,
               marginTop: 5,
             ),
             const Spacer(),
             LargeButton(
               label: 'Enviar Email',
-              onPressed: () {},
+              onPressed: store.sendEmail,
               marginTop: 40,
             ),
           ],

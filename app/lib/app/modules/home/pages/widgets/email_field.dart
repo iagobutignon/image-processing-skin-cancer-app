@@ -9,6 +9,7 @@ class EmailField extends StatelessWidget {
   final double marginTop;
   final double marginRight;
   final double marginBottom;
+  final bool withBorder;
 
   final TextEditingController controller;
 
@@ -21,7 +22,19 @@ class EmailField extends StatelessWidget {
     this.marginTop = 0,
     this.marginRight = 0,
     this.marginBottom = 0,
+    this.withBorder = true,
   });
+
+  Color get colorSelector =>
+      MaterialStateColor.resolveWith((states) => states.contains(MaterialState.focused) ? const Color(AppColors.green) : const Color(AppColors.grey));
+
+  OutlineInputBorder? get greyBorder => !withBorder 
+    ? OutlineInputBorder(borderRadius: BorderRadius.circular(15), borderSide: const BorderSide(color: Color(AppColors.grey), width: 0))
+    : OutlineInputBorder(borderRadius: BorderRadius.circular(15), borderSide: const BorderSide(color: Color(AppColors.grey), width: 2));
+
+  OutlineInputBorder? get greenBorder => !withBorder 
+    ? OutlineInputBorder(borderRadius: BorderRadius.circular(15), borderSide: const BorderSide(color: Color(AppColors.grey), width: 0)) 
+    : OutlineInputBorder(borderRadius: BorderRadius.circular(15), borderSide: const BorderSide(color: Color(AppColors.green), width: 2));
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +47,7 @@ class EmailField extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
+        keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           label: Text(label),
           labelStyle: const TextStyle(
@@ -43,9 +57,11 @@ class EmailField extends StatelessWidget {
           prefixIcon: leadingIcon,
           filled: true,
           fillColor: const Color(AppColors.white),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
+          prefixIconColor: colorSelector,
+          suffixIconColor: colorSelector,
+          border: greenBorder,
+          enabledBorder: greyBorder,
+          focusedBorder: greenBorder,
         ),
       ),
     );

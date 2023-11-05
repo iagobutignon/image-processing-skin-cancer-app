@@ -54,7 +54,7 @@ class HomePageState extends State<HomePage> {
             onSelected: (value) {
               switch(value) {
                 case 0:
-                  store.logoff();
+                  store.signOut();
                   break;
                 case 1:
                   store.changePassword();

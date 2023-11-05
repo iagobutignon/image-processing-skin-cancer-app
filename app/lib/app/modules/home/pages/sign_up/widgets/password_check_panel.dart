@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../shared/colors/app_colors.dart';
 import 'check_text.dart';
 
 class PasswordCheckPanel extends StatelessWidget {
+  final bool hasMinChars;
+  final bool hasOneNumber;
+  final bool hasOneLowerLetter;
+  final bool hasOneUpperLetter;
+  final bool hasOneSymbol;
+  final bool isValid;
 
   final double marginLeft;
   final double marginTop;
@@ -15,6 +22,12 @@ class PasswordCheckPanel extends StatelessWidget {
     this.marginTop = 0,
     this.marginRight = 0,
     this.marginBottom = 0,
+    this.hasMinChars = false,
+    this.hasOneNumber = false,
+    this.hasOneLowerLetter = false,
+    this.hasOneUpperLetter = false,
+    this.hasOneSymbol = false,
+    this.isValid = false,
   });
 
   @override
@@ -29,37 +42,38 @@ class PasswordCheckPanel extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.grey,
+          color: const Color(AppColors.grey),
+          width: 2,
         ),
         borderRadius: BorderRadius.circular(10),
       ),
       width: double.infinity,
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CheckText(
             label: 'Mínimo de 8 caracteres',
-            checked: true,
+            checked: hasMinChars,
           ),
           CheckText(
             label: 'Pelo menos um número',
-            checked: true,
+            checked: hasOneNumber,
           ),
           CheckText(
             label: 'Pelo menos uma letra minúscula',
-            checked: true,
+            checked: hasOneLowerLetter,
           ),
           CheckText(
             label: 'Pelo menos uma letra maiúscula',
-            checked: false,
+            checked: hasOneUpperLetter,
           ),
           CheckText(
             label: 'Pelo menos um símbolo (!@#\$%&*)',
-            checked: true,
+            checked: hasOneSymbol,
           ),
           CheckText(
             label: 'Confirmação de senha válida',
-            checked: false,
+            checked: isValid,
           ),
         ],
       ),

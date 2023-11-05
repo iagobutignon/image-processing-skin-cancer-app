@@ -10,9 +10,11 @@ import '../pages/processing/processing_page.dart';
 import '../pages/sign_in/sign_in_page.dart';
 import '../pages/sign_up/sign_up_page.dart';
 import '../routes/home_routes.dart';
+import '../services/auth_service.dart';
 import '../services/http_service.dart';
 import '../services/image_processing_service.dart';
 import '../services/image_service.dart';
+import '../services/interfaces/iauth_service.dart';
 import '../services/interfaces/ihttp_service.dart';
 import '../services/interfaces/iimage_processing_service.dart';
 import '../services/interfaces/iimage_service.dart';
@@ -28,18 +30,19 @@ import '../stores/sign_up_store.dart';
 
 class HomeDI {
   static List<Bind> get binds => [
+    Bind.lazySingleton<IAuthService>((i) => AuthService()),
     Bind.lazySingleton<IHttpService>((i) => HttpService()),
     Bind.lazySingleton<IImageProcessingService>((i) => ImageProcessingService(i())),
     Bind.lazySingleton<IImageService>((i) => ImageService()),
-    Bind.lazySingleton((i) => SignInStore()),
-    Bind.lazySingleton((i) => SignUpStore()),
-    Bind.lazySingleton((i) => ForgotPasswordStore()),
-    Bind.lazySingleton((i) => ChangePasswordStore()),
-    Bind.lazySingleton((i) => HomeStore()),
+    Bind.lazySingleton((i) => SignInStore(i())),
+    Bind.lazySingleton((i) => SignUpStore(i())),
+    Bind.lazySingleton((i) => ForgotPasswordStore(i())),
+    Bind.lazySingleton((i) => ChangePasswordStore(i())),
+    Bind.lazySingleton((i) => HomeStore(i())),
     Bind.lazySingleton((i) => CameraStore()),
     Bind.lazySingleton((i) => EditImageStore(i())),
     Bind.lazySingleton((i) => ProcessingStore(i())),
-    Bind.lazySingleton((i) => AnalysisStore())
+    Bind.lazySingleton((i) => AnalysisStore()),
   ];
 
   static List<ModularRoute> get routes => [
