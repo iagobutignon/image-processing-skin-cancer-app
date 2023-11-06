@@ -79,18 +79,34 @@ class _ProcessingPageState extends State<ProcessingPage> {
                         image: triple.state.baseImg,
                         callback: store.toGrayscale,
                       ),
-                      ProcessingImage(
-                        label: 'Sobel',
-                        id: triple.state.id,
-                        image: triple.state.baseImg,
-                        callback: store.toSobel,
-                      ),
-                      ProcessingImage(
-                        label: 'Contour',
-                        id: triple.state.id,
-                        image: triple.state.baseImg,
-                        callback: store.toContour,
-                      ),
+                      if (triple.state.grayScaleImg != null)
+                        ProcessingImage(
+                          label: 'Detail',
+                          id: triple.state.id,
+                          image: triple.state.grayScaleImg,
+                          callback: store.toDetail,
+                        ),
+                      if (triple.state.detailedImg != null)
+                        ProcessingImage(
+                          label: 'Contraste',
+                          id: triple.state.id,
+                          image: triple.state.detailedImg,
+                          callback: store.toContrast,
+                        ),
+                      if (triple.state.contrastedImg != null)
+                        ProcessingImage(
+                          label: 'Sobel',
+                          id: triple.state.id,
+                          image: triple.state.contrastedImg,
+                          callback: store.toSobel,
+                        ),
+                      if (triple.state.contrastedImg != null)
+                        ProcessingImage(
+                          label: 'Contour',
+                          id: triple.state.id,
+                          image: triple.state.contrastedImg,
+                          callback: store.toContour,
+                        ),
                     ],
                   ),
                 ),

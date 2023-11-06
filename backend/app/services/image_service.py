@@ -1,23 +1,8 @@
-from PIL import Image, ImageOps, ImageFilter
+from PIL import Image, ImageOps, ImageFilter, ImageEnhance
 from services.conversion_service import ConversionService
 
 
 class ImageService():
-    def apply_sobel(image, id):
-        image = ImageService._open(image, id)
-        image = image.convert("L")
-        image = image.filter(ImageFilter.FIND_EDGES)
-        image.save('../output/sobel/'+id+'_sobel.jpg')
-        img = ConversionService.encodeImage(image)
-        return img.decode('utf-8')
-
-    def apply_contour(image, id):
-        image = ImageService._open(image, id)
-        image = image.filter(ImageFilter.CONTOUR)
-        image.save('../output/contour/'+id+'_contour.jpg')
-        img = ConversionService.encodeImage(image)
-        return img.decode('utf-8')
-
     def apply_gray_scale(image, id):
         R = 0.2989
         G = 0.5870
@@ -35,6 +20,42 @@ class ImageService():
                 image.putpixel((x, y), (aux, aux, aux))
 
         image.save('../output/gray_scale/'+id+'_gray_scale.jpg')
+        img = ConversionService.encodeImage(image)
+        return img.decode('utf-8')
+    
+    def apply_blur(image, id):
+        image = ImageService._open(image, id)
+        image = image.filter(ImageFilter.BLUR)
+        image.save('../output/sobel/'+id+'_sobel.jpg')
+        img = ConversionService.encodeImage(image)
+        return img.decode('utf-8')
+    
+    def apply_contrast(image, id):
+        image = ImageService._open(image, id)
+        image = ImageEnhance.Contrast(image).enhance(3)
+        image.save('../output/sobel/'+id+'_sobel.jpg')
+        img = ConversionService.encodeImage(image)
+        return img.decode('utf-8')
+
+    def apply_detail(image, id):
+        image = ImageService._open(image, id)
+        image = image.filter(ImageFilter.DETAIL)
+        image.save('../output/sobel/'+id+'_sobel.jpg')
+        img = ConversionService.encodeImage(image)
+        return img.decode('utf-8')
+    
+    def apply_sobel(image, id):
+        image = ImageService._open(image, id)
+        image = image.convert("L")
+        image = image.filter(ImageFilter.FIND_EDGES)
+        image.save('../output/sobel/'+id+'_sobel.jpg')
+        img = ConversionService.encodeImage(image)
+        return img.decode('utf-8')
+
+    def apply_contour(image, id):
+        image = ImageService._open(image, id)
+        image = image.filter(ImageFilter.CONTOUR)
+        image.save('../output/contour/'+id+'_contour.jpg')
         img = ConversionService.encodeImage(image)
         return img.decode('utf-8')
 

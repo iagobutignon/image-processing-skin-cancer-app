@@ -20,6 +20,7 @@ class CameraStore extends Store<CameraState> {
     final Uint8List pictureBytes = await pictureFile.readAsBytes();
     final Uint8List croppedImage = await cropPicture(pictureBytes);
 
+    await cameraController.setFlashMode(FlashMode.off);
     HomeRoutes().pushEditImage(croppedImage);
   }
 
@@ -56,10 +57,29 @@ class CameraStore extends Store<CameraState> {
 
       setLoading(false);
       final aux = state;
+      aux.cameras = cameras;
       await execute(() async => aux);
     } on Exception catch (_) {
       setLoading(false);
       setError(Exception('Erro $_'));
+    }
+  }
+
+  Future<void> switchCamera() async {
+    try {
+      setLoading(true, force: true);
+      final aux = state;
+      aux.camera = state.switchCamera();
+      await cameraController.setDescription(aux.currentCamera);
+      await cameraController.initialize();
+      await cameraController.lockCaptureOrientation(DeviceOrientation.portraitUp);
+      await cameraController.setFlashMode(FlashMode.off);
+      update(aux, force: true);
+      setLoading(false, force: true);
+    } catch (e) {
+      print(e);
+      setLoading(false, force: true);
+      setError(e);
     }
   }
 
@@ -94,7 +114,8 @@ class CameraStore extends Store<CameraState> {
   }
 
   @override
-  Future destroy() {
+  Future destroy() async {
+    await cameraController.setFlashMode(FlashMode.off);
     cameraController.dispose();
     return super.destroy();
   }

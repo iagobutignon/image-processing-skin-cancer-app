@@ -9,11 +9,15 @@ import 'camera_icon.dart';
 class CameraWidget extends StatefulWidget {
   final CameraStore store;
   final void Function()? onTakePicture;
+  final void Function()? switchCamera;
+  final void Function()? switchFlash;
 
   const CameraWidget({
     super.key,
     required this.store,
     this.onTakePicture,
+    this.switchCamera,
+    this.switchFlash,
   });
 
   @override
@@ -52,6 +56,16 @@ class _CameraWidgetState extends State<CameraWidget> {
           });
         });
       });
+    }
+  }
+
+  IconData flashIcon(int index) {
+    switch (index) {
+      case 1: return Icons.flash_off;
+      case 2: return Icons.flash_auto;
+      case 3: return Icons.flash_on;
+      case 4: return Icons.flashlight_on;
+      default:return Icons.flash_off;
     }
   }
 
@@ -107,9 +121,14 @@ class _CameraWidgetState extends State<CameraWidget> {
                 onPressed: widget.onTakePicture,
               ),
               CameraIcon(
-                icon: Icons.flash_on,
+                icon: flashIcon(state.flash),
                 alignment: Alignment.bottomRight,
-                onPressed: () {},
+                onPressed: widget.switchFlash,
+              ),
+              CameraIcon(
+                icon: Icons.cameraswitch,
+                alignment: Alignment.bottomLeft,
+                onPressed: widget.switchCamera,
               ),
             ],
           ),

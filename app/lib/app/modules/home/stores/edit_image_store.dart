@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_triple/flutter_triple.dart';
-import 'package:tcc_iago/app/modules/home/routes/home_routes.dart';
 
+import '../routes/home_routes.dart';
 import '../services/interfaces/iimage_service.dart';
 import '../states/edit_image_state.dart';
 
@@ -43,8 +43,8 @@ class EditImageStore extends Store<EditImageState> {
         throw Exception('Erro ao editar imagem');
       }
 
-      HomeRoutes().pushProcessing(result);
       setLoading(false);
+      HomeRoutes().pushProcessing(result);
     } catch (e) {
       setLoading(false);
       setError(e);

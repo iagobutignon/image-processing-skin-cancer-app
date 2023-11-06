@@ -18,30 +18,49 @@ class ProcessingStore extends Store<ProcessingState> {
     return image;
   }
 
-  Future<String> toContour(String id, String image) async {
-    await Future.delayed(const Duration(seconds: 2));
-
-    final contourImg = await _imageProcessingService.toContour(image, id);
-    return contourImg['image'];
+  Future<String> toGrayscale(String id, String image) async {
+    final result = await _imageProcessingService.toGrayscale(image, id);
+    final aux = state;
+    aux.grayScaleImg = result['image'];
+    await execute(() async => aux);
+    return result['image'];
   }
 
-  Future<String> toGrayscale(String id, String image) async {
-    await Future.delayed(const Duration(seconds: 3));
+  Future<String> toBlur(String id, String image) async {
+    final result = await _imageProcessingService.toBlur(image, id);
+    final aux = state;
+    aux.blurredImg = result['image'];
+    await execute(() async => aux);
+    return result['image'];
+  }
+  
+  Future<String> toContrast(String id, String image) async {
+    final result = await _imageProcessingService.toContrast(image, id);
+    final aux = state;
+    aux.contrastedImg = result['image'];
+    await execute(() async => aux);
+    return result['image'];
+  }
 
-    final contourImg = await _imageProcessingService.toGrayscale(image, id);
-    return contourImg['image'];
+  Future<String> toDetail(String id, String image) async {
+    final result = await _imageProcessingService.toDetail(image, id);
+    final aux = state;
+    aux.detailedImg = result['image'];
+    await execute(() async => aux);
+    return result['image'];
+  }
+
+  Future<String> toContour(String id, String image) async {
+    final result = await _imageProcessingService.toContour(image, id);
+    return result['image'];
   }
 
   Future<String> toSobel(String id, String image) async {
-    await Future.delayed(const Duration(seconds: 1));
-
-    final contourImg = await _imageProcessingService.toSobel(image, id);
-    return contourImg['image'];
+    final result = await _imageProcessingService.toSobel(image, id);
+    return result['image'];
   }
 
   Future<List<int>> getColorHistogram(String id, String image) async {
-    await Future.delayed(const Duration(seconds: 2));
-
     final colorHistogram = await _imageProcessingService.getColorHistogram(image, id);
     return List<int>.from(colorHistogram['image']);
   }

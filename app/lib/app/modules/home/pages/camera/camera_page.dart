@@ -52,6 +52,8 @@ class _CameraPageState extends State<CameraPage> {
             return CameraWidget(
               store: store,
               onTakePicture: store.takePicture,
+              switchCamera: store.switchCamera,
+              switchFlash: store.switchFlash,
             );
           },
         ),
