@@ -28,7 +28,7 @@ class HomeDI {
     Bind.lazySingleton<IImageProcessingService>((i) => ImageProcessingService(i())),
     Bind.lazySingleton<IImageService>((i) => ImageService()),
     Bind.lazySingleton((i) => ChangePasswordStore(i())),
-    Bind.lazySingleton((i) => HomeStore(i())),
+    Bind.lazySingleton((i) => HomeStore(i(), i())),
     Bind.lazySingleton((i) => CameraStore()),
     Bind.lazySingleton((i) => EditImageStore(i())),
     Bind.lazySingleton((i) => ProcessingStore(i())),

@@ -2,10 +2,20 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'interfaces/iimage_service.dart';
 
 class ImageService extends IImageService {
+  @override
+  Future<Uint8List?> getImageFromGallery() async {
+    final result = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+
+    return await result?.readAsBytes();
+  }
+
   @override
   Future<Uint8List?> editImage(ExtendedImageEditorState state) async {
     final Rect? cropRect = state.getCropRect();
