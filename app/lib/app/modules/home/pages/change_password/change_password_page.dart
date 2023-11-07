@@ -55,7 +55,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               marginTop: 15,
             ),
             PasswordField(
-              label: 'Confirmar nova senha',
+              label: 'Nova senha',
               controller: TextEditingController(),
               marginTop: 15,
             ),

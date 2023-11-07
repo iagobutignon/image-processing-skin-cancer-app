@@ -48,7 +48,7 @@ class _AnalysisPageState extends State<AnalysisPage> {
             Spacer(),
             ArcChart(
               label: 'Probabilidade de melanoma',
-              value: 0.90,
+              value: 0.67,
             ),
             Spacer(),
             LargeButton(
