@@ -41,18 +41,19 @@ class _AnalysisPageState extends State<AnalysisPage> {
         backgroundColor: AppTheme.mainColor,
         centerTitle: true,
       ),
-      body: const Padding(
+      body: Padding(
         padding: EdgeInsets.all(8),
         child: Column(
           children: [
-            Spacer(),
-            ArcChart(
+            const Spacer(),
+            const ArcChart(
               label: 'Probabilidade de melanoma',
               value: 0.67,
             ),
-            Spacer(),
+            const Spacer(),
             LargeButton(
               label: 'Concluir',
+              onPressed: store.done,
             ),
           ],
         ),
