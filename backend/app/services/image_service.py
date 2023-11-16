@@ -25,28 +25,37 @@ class ImageService():
     
     def apply_blur(image, id):
         image = ImageService._open(image, id)
-        image = image.filter(ImageFilter.BLUR)
-        image.save('../output/sobel/'+id+'_sobel.jpg')
+        image = image.filter(ImageFilter.GaussianBlur)
+        image = image.filter(ImageFilter.MinFilter(15))
+        image.save('../output/blur/'+id+'_blur.jpg')
         img = ConversionService.encodeImage(image)
         return img.decode('utf-8')
     
     def apply_contrast(image, id):
         image = ImageService._open(image, id)
-        image = ImageEnhance.Contrast(image).enhance(3)
-        image.save('../output/sobel/'+id+'_sobel.jpg')
+        image = image.filter(ImageFilter.GaussianBlur)
+        image = image.filter(ImageFilter.MinFilter(15))
+        image = ImageEnhance.Contrast(image).enhance(11)
+        image.save('../output/contrast/'+id+'_contrast.jpg')
         img = ConversionService.encodeImage(image)
         return img.decode('utf-8')
 
     def apply_detail(image, id):
         image = ImageService._open(image, id)
         image = image.filter(ImageFilter.DETAIL)
-        image.save('../output/sobel/'+id+'_sobel.jpg')
+        image.save('../output/detail/'+id+'_detail.jpg')
         img = ConversionService.encodeImage(image)
         return img.decode('utf-8')
     
     def apply_sobel(image, id):
         image = ImageService._open(image, id)
         image = image.convert("L")
+        image = image.filter(ImageFilter.GaussianBlur)
+        image = image.filter(ImageFilter.MinFilter(15))
+        image = ImageEnhance.Contrast(image).enhance(11)
+        image = image.filter(ImageFilter.SMOOTH)
+        image = image.filter(ImageFilter.EDGE_ENHANCE_MORE)
+        image = image.filter(ImageFilter.EMBOSS)
         image = image.filter(ImageFilter.FIND_EDGES)
         image.save('../output/sobel/'+id+'_sobel.jpg')
         img = ConversionService.encodeImage(image)
@@ -56,6 +65,18 @@ class ImageService():
         image = ImageService._open(image, id)
         image = image.filter(ImageFilter.CONTOUR)
         image.save('../output/contour/'+id+'_contour.jpg')
+        img = ConversionService.encodeImage(image)
+        return img.decode('utf-8')
+
+    def apply_emboss(image, id):
+        image = ImageService._open(image, id)
+        image = image.filter(ImageFilter.GaussianBlur)
+        image = image.filter(ImageFilter.MinFilter(15))
+        image = ImageEnhance.Contrast(image).enhance(11)
+        image = image.filter(ImageFilter.SMOOTH)
+        image = image.filter(ImageFilter.EDGE_ENHANCE_MORE)
+        image = image.filter(ImageFilter.EMBOSS)
+        image.save('../output/emboss/'+id+'_emboss.jpg')
         img = ConversionService.encodeImage(image)
         return img.decode('utf-8')
 

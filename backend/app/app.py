@@ -65,6 +65,16 @@ def contour():
         "image": image
     }, 200
 
+@app.route("/emboss", methods=['POST'])
+def emboss():
+    id = request.json['id']
+    imageAux = request.json['image']
+    image = ImageService.apply_emboss(imageAux, id)
+    return {
+        "id": id,
+        "image": image
+    }, 200
+
 @app.route('/histogram', methods=['POST'])
 def histogram():
     id = request.json['id']
