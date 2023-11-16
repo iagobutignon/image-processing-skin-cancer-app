@@ -48,7 +48,9 @@ class _SignInPageState extends State<SignInPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Image.asset(AppImages.logo),
+              Flexible(
+                child: Image.asset(AppImages.logo),
+              ),
               EmailField(
                 controller: store.emailController,
                 withBorder: false,
