@@ -37,3 +37,5 @@ flutter:
   assets:
     - assets/icons/email_grey_30px.png
     - assets/icons/google_48px.png
+    - assets/images/ABCDE.jpg
+    - assets/images/logo.jpg

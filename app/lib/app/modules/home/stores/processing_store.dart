@@ -50,13 +50,27 @@ class ProcessingStore extends Store<ProcessingState> {
     return result['image'];
   }
 
+  Future<String> toEmboss(String id, String image) async {
+    final result = await _imageProcessingService.toEmboss(image, id);
+    final aux = state;
+    aux.embossedImg = result['image'];
+    await execute(() async => aux);
+    return result['image'];
+  }
+
   Future<String> toContour(String id, String image) async {
     final result = await _imageProcessingService.toContour(image, id);
+    final aux = state;
+    aux.contourImg = result['image'];
+    await execute(() async => aux);
     return result['image'];
   }
 
   Future<String> toSobel(String id, String image) async {
     final result = await _imageProcessingService.toSobel(image, id);
+    final aux = state;
+    aux.sobelImg = result['image'];
+    await execute(() async => aux);
     return result['image'];
   }
 

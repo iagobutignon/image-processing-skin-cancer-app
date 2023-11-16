@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcc_iago/core/colors/app_colors.dart';
 
 import '../../../../../core/assets/app_icons.dart';
+import '../../../../../core/assets/app_images.dart';
 import '../../../../../core/themes/app_theme.dart';
 import '../../../shared/widgets/email_field.dart';
 import '../../../shared/widgets/large_button.dart';
@@ -47,6 +48,7 @@ class _SignInPageState extends State<SignInPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              Image.asset(AppImages.logo),
               EmailField(
                 controller: store.emailController,
                 withBorder: false,

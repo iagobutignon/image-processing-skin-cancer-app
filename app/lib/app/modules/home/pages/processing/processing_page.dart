@@ -62,7 +62,7 @@ class _ProcessingPageState extends State<ProcessingPage> {
                     physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 1,
+                      childAspectRatio: 1.1,
                       crossAxisSpacing: 8,
                       mainAxisSpacing: 8,
                     ),
@@ -74,38 +74,38 @@ class _ProcessingPageState extends State<ProcessingPage> {
                         callback: store.base,
                       ),
                       ProcessingImage(
-                        label: 'Escala de Cinza',
+                        label: 'Tons de Cinza',
                         id: triple.state.id,
                         image: triple.state.baseImg,
                         callback: store.toGrayscale,
                       ),
                       if (triple.state.grayScaleImg != null)
                         ProcessingImage(
-                          label: 'Detail',
+                          label: 'Gaussian Blur',
                           id: triple.state.id,
                           image: triple.state.grayScaleImg,
-                          callback: store.toDetail,
+                          callback: store.toBlur,
                         ),
-                      if (triple.state.detailedImg != null)
+                      if (triple.state.blurredImg != null)
                         ProcessingImage(
                           label: 'Contraste',
                           id: triple.state.id,
-                          image: triple.state.detailedImg,
+                          image: triple.state.grayScaleImg,
                           callback: store.toContrast,
                         ),
                       if (triple.state.contrastedImg != null)
                         ProcessingImage(
+                          label: 'Emboss',
+                          id: triple.state.id,
+                          image: triple.state.grayScaleImg,
+                          callback: store.toEmboss,
+                        ),
+                      if (triple.state.embossedImg != null)
+                        ProcessingImage(
                           label: 'Sobel',
                           id: triple.state.id,
-                          image: triple.state.contrastedImg,
+                          image: triple.state.grayScaleImg,
                           callback: store.toSobel,
-                        ),
-                      if (triple.state.contrastedImg != null)
-                        ProcessingImage(
-                          label: 'Contour',
-                          id: triple.state.id,
-                          image: triple.state.contrastedImg,
-                          callback: store.toContour,
                         ),
                     ],
                   ),

@@ -71,6 +71,22 @@ class ImageProcessingService implements IImageProcessingService {
       'image': result['image'],
     };
   }
+  
+  @override
+  Future<Map<String, dynamic>> toEmboss(String image, String id) async {
+    final result = await _httpService.post(
+      endpoint: 'emboss',
+      data: {
+        'id': id,
+        'image': image,
+      },
+    );
+
+    return {
+      'id': result['id'],
+      'image': result['image'],
+    };
+  }
 
   @override
   Future<Map<String, dynamic>> toSobel(String image, String id) async {

@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../../../../../core/assets/app_images.dart';
 import '../../../../../core/themes/app_theme.dart';
 import '../../../shared/widgets/large_button.dart';
 import '../../stores/home_store.dart';
+import 'widgets/break_line.dart';
+import 'home_drawer.dart';
+import 'widgets/page_image.dart';
+import 'widgets/page_text.dart';
+import 'widgets/page_title.dart';
+import 'widgets/section_title.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -39,20 +46,18 @@ class HomePageState extends State<HomePage> {
         title: Text(widget.title),
         backgroundColor: AppTheme.mainColor,
         centerTitle: true,
-        leading: Builder(
-          builder: (context) {
-            return IconButton(
-              icon: const Icon(Icons.info_outline),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            );
-          }
-        ),
+        leading: Builder(builder: (context) {
+          return IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          );
+        }),
         actions: [
           PopupMenuButton(
             onSelected: (value) {
-              switch(value) {
+              switch (value) {
                 case 0:
                   store.signOut();
                   break;
@@ -80,38 +85,25 @@ class HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      drawer: Drawer(
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Sobre o app'),
-            backgroundColor: AppTheme.mainColor,
-            centerTitle: true,
-            leading: IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ),
-          body: const Align(
-            alignment: Alignment.bottomRight,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text('Versão 1.0.0'),
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
+      drawer: const HomeDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
           children: [
-            const Expanded(
-              child: Center(
-                child: Text('Descrição sobre o melanoma'),
+            Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+                children: [
+                  const PageTitle(title: 'O que é melanoma'),
+                  const BreakLine(),
+                  PageText(text: store.state.whatIsMelanoma),
+                  const BreakLine(),
+                  PageText(text: store.state.abcdeText),
+                  const BreakLine(),
+                  const SectionTitle(title: 'ABCDE do melanoma'),
+                  const PageImage(asset: AppImages.abcdeImage),
+                ],
               ),
             ),
             LargeButton(

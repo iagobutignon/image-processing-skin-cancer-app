@@ -51,17 +51,24 @@ class _ProcessingImageState extends State<ProcessingImage> {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          TripleBuilder<ProcessingImageStore, String>(
+          ScopedBuilder<ProcessingImageStore, String>(
             store: store,
-            builder: (context, triple) {
-              if (triple.isLoading || triple.state.isEmpty) {
+            onLoading: (context) {
+              return const Center(child: CircularProgressIndicator());
+            },
+            onError: (context, error) {
+              store.processImage(id: widget.id, image: widget.image, f: widget.callback);
+              return const Center(child: CircularProgressIndicator());
+            },
+            onState: (context, state) {
+              if (state.isEmpty) {
                 return const Center(child: CircularProgressIndicator());
               }
               return Image.memory(
-                base64Decode(triple.state),
+                base64Decode(state),
                 fit: BoxFit.cover,
               );
-            }
+            },
           ),
           Positioned(
             top: 0,

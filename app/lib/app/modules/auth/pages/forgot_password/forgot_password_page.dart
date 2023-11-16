@@ -8,7 +8,7 @@ import '../../stores/forgot_password_store.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   final String title;
-  
+
   const ForgotPasswordPage({
     super.key,
     this.title = 'Esqueci minha senha',
@@ -48,6 +48,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             EmailField(
               controller: store.emailController,
               marginTop: 5,
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Um email será enviado para sua conta com os passos para redefinir sua senha.',
+                textAlign: TextAlign.justify,
+              ),
             ),
             const Spacer(),
             LargeButton(

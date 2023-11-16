@@ -40,29 +40,57 @@ class _ColorHistogramChartState extends State<ColorHistogramChart> {
 
   @override
   Widget build(BuildContext context) {
-    return TripleBuilder<ColorHistogramChartStore, List<int>>(
-      store: store,
-      builder: (context, triple) {
-        // if (triple.isLoading) {
-        //   return const Center(child: CircularProgressIndicator());
-        // }
-        
-        return AspectRatio(
-          aspectRatio: 2,
-          child: SfCartesianChart(
-            title: ChartTitle(text: 'Histograma de cores'),
-            plotAreaBackgroundColor: Colors.white,
-            series: <ChartSeries<int, int>>[
-              ColumnSeries(
-                color: const Color(AppColors.black),
-                dataSource: triple.state,
-                xValueMapper: (v, x) => x,
-                yValueMapper: (v, x) => v,
-              ),
-            ],
+    return Container(
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Stack(
+        children: [
+          TripleBuilder<ColorHistogramChartStore, List<int>>(
+            store: store,
+            builder: (context, triple) {        
+              return AspectRatio(
+                aspectRatio: 2.5,
+                child: SfCartesianChart(
+                  primaryXAxis: NumericAxis(
+                    minimum: 0,
+                    maximum: 260,
+                  ),
+                  primaryYAxis: NumericAxis(),
+                  plotAreaBackgroundColor: const Color(AppColors.grey).withAlpha(50),
+                  series: <ChartSeries<int, int>>[
+                    ColumnSeries<int, int>(
+                      color: const Color(AppColors.black),
+                      dataSource: triple.state,
+                      xValueMapper: (int v, int x) => x,
+                      yValueMapper: (int v, int x) => v,
+                    ),
+                  ],
+                ),
+              );
+            }
           ),
-        );
-      }
+          Positioned(
+            top: 10,
+            right: 10,
+            child: Container(
+              padding: const EdgeInsets.only(left: 15),
+              decoration: BoxDecoration(
+                color: Colors.white.withAlpha(175),
+                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(18)),
+              ),
+              child: Text(
+                'Histograma de cores',
+                style: TextStyle(
+                  color: const Color(AppColors.black).withAlpha(200),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

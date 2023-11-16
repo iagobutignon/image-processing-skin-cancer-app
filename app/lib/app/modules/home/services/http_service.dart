@@ -3,12 +3,19 @@ import 'package:dio/dio.dart';
 import 'interfaces/ihttp_service.dart';
 
 class HttpService implements IHttpService {
-  // static const _url = "http://192.168.0.109:8000/"; // Casa
-  static const _url = "http://192.168.80.166:8000/"; // Cel
-  
-  final Dio _dio = Dio(BaseOptions(
+  static const _url = "http://192.168.0.109:8000/"; // Casa
+  // static const _url = "http://192.168.80.166:8000/"; // Cel
+
+  final Dio _dio = Dio(
+    BaseOptions(
       // http://192.168.0.109:5000/  --> Endereço do Note
-      ));
+      persistentConnection: true,
+      connectTimeout: const Duration(minutes: 1),
+      contentType: 'application/json',
+      followRedirects: false,
+      validateStatus: (status) => true,
+    ),
+  );
 
   @override
   Future<dynamic> get({

@@ -1,3 +1,4 @@
 class AppImages {
-  static const marketImage = 'assets/images/market.jpg';
+  static const abcdeImage = 'assets/images/ABCDE.jpg';
+  static const logo = 'assets/images/logo.jpg';
 }

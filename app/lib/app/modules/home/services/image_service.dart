@@ -11,6 +11,7 @@ class ImageService extends IImageService {
   Future<Uint8List?> getImageFromGallery() async {
     final result = await ImagePicker().pickImage(
       source: ImageSource.gallery,
+      imageQuality: 100,
     );
 
     return await result?.readAsBytes();

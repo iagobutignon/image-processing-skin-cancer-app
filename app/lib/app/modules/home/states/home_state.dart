@@ -1,9 +1,5 @@
-import 'dart:typed_data';
 
 class HomeState {
-  Uint8List? baseImg;
-  Uint8List? grayScaleImg;
-  Uint8List? sobelmg;
-  Uint8List? contourImg;
-  List<int>? colorHistogram;
+  final whatIsMelanoma = 'O melanoma, embora seja menos comum, possui o prognóstico mais grave e uma taxa de mortalidade mais alta entre os cânceres de pele. No entanto, quando identificado precocemente, as chances de cura superam os 90%. O melanoma geralmente se manifesta como uma pinta ou sinal na pele, com tonalidades que variam entre tons acastanhados e enegrecidos. Suas características incluem mudanças na cor, formato ou tamanho da lesão, podendo também causar sangramento.\n\nAs mulheres tendem a apresentar mais casos de melanoma nas pernas, enquanto nos homens é mais comum no tronco. Além disso, em ambos os sexos, pode ocorrer nas regiões do rosto e pescoço.';
+  final abcdeText = 'Uma regra amplamente reconhecida para auxiliar na detecção do melanoma, é o "ABCDE do melanoma". Essa regra identifica sinais que podem indicar possíveis tumores na pele, que são assimetria, bordas irregulares, cor variada, diâmetro (com mais de 6 mm) e evolução. É importante ressaltar que em muitos casos, essas alterações não são necessariamente indicativas de câncer, mas a investigação médica é crucial para esclarecer qualquer preocupação.';
 }
