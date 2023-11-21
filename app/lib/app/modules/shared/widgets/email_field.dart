@@ -16,7 +16,7 @@ class EmailField extends StatelessWidget {
   const EmailField({
     super.key,
     required this.controller,
-    this.label = 'Email',
+    this.label = 'E-mail',
     this.leadingIcon = const Icon(Icons.email),
     this.marginLeft = 0,
     this.marginTop = 0,

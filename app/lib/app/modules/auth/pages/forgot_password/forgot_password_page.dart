@@ -52,13 +52,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'Um email será enviado para sua conta com os passos para redefinir sua senha.',
+                'Um e-mail será enviado para sua conta com os passos para redefinir sua senha.',
                 textAlign: TextAlign.justify,
               ),
             ),
             const Spacer(),
             LargeButton(
-              label: 'Enviar Email',
+              label: 'Enviar e-mail',
               onPressed: store.sendEmail,
               marginTop: 40,
             ),

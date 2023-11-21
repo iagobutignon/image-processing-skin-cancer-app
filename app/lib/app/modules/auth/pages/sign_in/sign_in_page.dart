@@ -61,7 +61,7 @@ class _SignInPageState extends State<SignInPage> {
                 withBorder: false,
               ),
               TextLink(
-                text: 'Esqueceu sua senha? Clique Aqui!',
+                text: 'Esqueceu sua senha? Clique aqui!',
                 marginTop: 15,
                 onTap: store.pushForgotPassword,
               ),
@@ -73,7 +73,7 @@ class _SignInPageState extends State<SignInPage> {
                 marginTop: 30,
               ),
               TextLink(
-                text: 'Não tem uma conta? Clique Aqui!',
+                text: 'Não tem uma conta? Clique aqui!',
                 onTap: store.pushSignUp,
                 marginTop: 15,
               ),

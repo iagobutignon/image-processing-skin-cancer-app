@@ -46,46 +46,11 @@ class HomePageState extends State<HomePage> {
         title: Text(widget.title),
         backgroundColor: AppTheme.mainColor,
         centerTitle: true,
-        leading: Builder(builder: (context) {
-          return IconButton(
-            icon: const Icon(Icons.info_outline),
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
-          );
-        }),
-        actions: [
-          PopupMenuButton(
-            onSelected: (value) {
-              switch (value) {
-                case 0:
-                  store.signOut();
-                  break;
-                case 1:
-                  store.changePassword();
-                  break;
-              }
-            },
-            itemBuilder: (context) {
-              return const [
-                PopupMenuItem(
-                  value: 0,
-                  child: Text('Sair'),
-                ),
-                PopupMenuItem(
-                  value: 1,
-                  child: Text('Alterar senha'),
-                ),
-              ];
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(8),
-              child: Icon(Icons.person),
-            ),
-          ),
-        ],
       ),
-      drawer: const HomeDrawer(),
+      drawer: HomeDrawer(
+        onChangePasswordTap: store.changePassword,
+        onSignOutTap: store.signOut,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
@@ -107,7 +72,7 @@ class HomePageState extends State<HomePage> {
               ),
             ),
             LargeButton(
-              label: 'Iniciar Análise',
+              label: 'Iniciar análise',
               onPressed: store.startAnalysis,
             ),
           ],

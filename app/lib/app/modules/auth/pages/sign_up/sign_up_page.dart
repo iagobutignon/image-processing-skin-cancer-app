@@ -75,13 +75,13 @@ class _SignUpPageState extends State<SignUpPage> {
                     marginTop: 15,
                   ),
                   PasswordField(
-                    label: 'Confirmar Senha',
+                    label: 'Confirmar senha',
                     controller: store.confirmPasswordController,
                     marginTop: 15,
                   ),
                   const Spacer(),
                   LargeButton(
-                    label: 'Criar Conta',
+                    label: 'Criar conta',
                     onPressed: store.createAccout,
                     marginTop: 40,
                   ),
